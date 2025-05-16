@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: nest_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: nestuser
+      POSTGRES_PASSWORD: nestpassword
+      POSTGRES_DB: nestdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - nest-network
+
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nest_app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: nestuser
+      DATABASE_PASSWORD: nestpassword
+      DATABASE_NAME: nestdb
+    depends_on:
+      - postgres
+    networks:
+      - nest-network
+
+volumes:
+  pgdata:
+
+networks:
+  nest-network:
