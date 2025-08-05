@@ -7,6 +7,16 @@
 $ pnpm install
 ```
 
+## Develop steps
+1. Paso 1
+2. Paso 2 
+
+
+## Nestjs commands
+
+
+
+
 ## Compile and run the project
 
 ```bash
@@ -33,8 +43,30 @@ $ docker run --rm -p 3000:3000 nestjs-app
 # init prisma database
 $ npx prisma init
 
+# command for clients database
+
+
 # make migrations
-$ npx prisma migrate dev --name init
+# $ npx prisma migrate dev --name init
+$ npx prisma migrate dev --name "Message for migration"
+
+# to add data to database from script
+$ npx prisma db seed
+# to work this fine yo have to do it
+$ npm install tsx
+# and in the script on the prisma object
+ "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+```
+
+## NestJs Commnands
+
+```bash
+$ npx nest module prisma
+$ npx nest service prisma
+$ npx nest generate resource
+
 ```
 
 ## Run tests
